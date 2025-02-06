@@ -6,8 +6,10 @@ const Layout = ({ children, titulo }) => {
     <>
       <NavBar />
       <SideBar />
-      <p>{titulo}</p>
-      <div>{children}</div>
+      <p className="text-red-600">{titulo}</p>
+      <div className="flex justify-center items-center mx-[10px]">
+        {children}
+      </div>
     </>
   );
 };

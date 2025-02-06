@@ -3,7 +3,7 @@ const ListStudent = ({ alumnos, handleDelete }) => {
 
   return (
     <>
-      <h1>lista de estudiantes</h1>
+      <h1 className="">lista de estudiantes</h1>
       {alumnos.length === 0 ? (
         <p>no hay alumnos</p>
       ) : (

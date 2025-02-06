@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { optionsSelect } from "../data/optionsSelect";
 
@@ -11,6 +11,12 @@ const Form = ({ titulo, alumnos, setAlumnos }) => {
   };
 
   const [curretAlumno, setCurrentAlumno] = useState(alumno);
+  const nombreRef = useRef(null);
+  console.log(nombreRef);
+
+  useEffect(() => {
+    nombreRef.current?.focus();
+  }, []);
 
   const handleOnChange = (e) => {
     console.log(e);
@@ -20,6 +26,13 @@ const Form = ({ titulo, alumnos, setAlumnos }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
+    if (!curretAlumno.nombre.trim()) {
+      alert("nombre obligatirio");
+      nombreRef.current?.focus();
+      return;
+    }
+
     setAlumnos([...alumnos, curretAlumno]);
     setCurrentAlumno(alumno);
   };
@@ -35,6 +48,7 @@ const Form = ({ titulo, alumnos, setAlumnos }) => {
         <div>
           <label htmlFor="nombre">nombre</label>
           <input
+            ref={nombreRef}
             value={curretAlumno.nombre}
             id="nombre"
             name="nombre"

@@ -6,6 +6,7 @@ import ListStudent from "./components/ListStudent";
 // import NavBar from "./components/layout/navBar/NavBar";
 import Layout from "./components/layout/layout";
 // import BasicTable from "./components/BasicTable";
+import Modal from "./components/Modal";
 
 function App() {
   const alumnosArray = [
@@ -35,6 +36,7 @@ function App() {
     },
   ];
 
+  const [openModal, setOpenModal] = useState(false);
   const [alumnos, setAlumnos] = useState(alumnosArray);
 
   useEffect(() => {
@@ -46,19 +48,28 @@ function App() {
     console.log(arrayFilter);
     setAlumnos(arrayFilter);
   };
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
 
   console.log("componente rederizado ");
   return (
     <>
       <Layout titulo="hola">
-        <Form
-          titulo={"formulario de registro"}
-          alumnos={alumnos}
-          setAlumnos={setAlumnos}
-        />
-        <ListStudent alumnos={alumnos} handleDelete={handleDelete} />
+        <div>
+          <Form
+            titulo={"formulario de registro"}
+            alumnos={alumnos}
+            setAlumnos={setAlumnos}
+          />
+          <ListStudent alumnos={alumnos} handleDelete={handleDelete} />
+          <button onClick={() => handleClickOpen()}>abrir modal</button>
+          {openModal && (
+            <Modal setOpenModal={setOpenModal} openModal={openModal} />
+          )}
+          {/* <BasicTable /> */}
+        </div>
       </Layout>
-      {/* <BasicTable /> */}
     </>
   );
 }
